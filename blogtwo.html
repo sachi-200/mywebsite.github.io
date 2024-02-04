@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BLOGTWO</title>
+    </head>
+    <body>
+        <script src="blogtwo.js"></script>
+        <center><h1>MUSIC</h1></center>
+        <h3>In the most general of terms, music is the arrangement of sound to create some combination of form, 
+        harmony, melody, rhythm, or otherwise expressive content. Definitions of music vary depending on 
+        culture, though it is an aspect of all human societies and a cultural universal.<br/>
+        While scholars agree that music is defined by a few specific elements, there is no consensus on 
+        their precise definitions. The creation of music is commonly divided into musical composition, 
+        musical improvisation, and musical performance, though the topic itself extends into academic 
+        disciplines, criticism, philosophy, psychology, and therapeutic contexts.<br/> 
+        Music may be performed or improvised using a vast range of instruments, including the human voice, 
+        and thus is often credited for its extreme versatility and opportunity for creativity.<br/>
+        In some musical contexts, a performance or composition may be to some extent improvised. For instance,
+        in Hindustani classical music, the performer plays spontaneously while following a partially defined
+        structure and using characteristic motifs.<br/> 
+        In modal jazz, the performers may take turns leading and responding while sharing a changing 
+        set of notes. In a free jazz context, there may be no structure whatsoever, with each performer 
+        acting at their discretion.<br/> 
+        Music may be deliberately composed to be unperformable or agglomerated electronically from many 
+        performances. Music is played in public and private areas, highlighted at events such as festivals,
+        rock concerts, and orchestra performances, and heard incidentally as part of a score or soundtrack 
+        to a film, TV show, opera, or video game.<br/> 
+        Musical playback is the primary function of an MP3 player or CD player, and a universal feature 
+        of radios and smartphones. Music often plays a key role in social activities, religious rituals, 
+        rite of passage ceremonies, celebrations, and cultural activities.<br/> 
+        The music industry includes songwriters, performers, sound engineers, producers, tour organizers, 
+        distributors of instruments, accessories, and sheet music. Compositions, performances, and recordings 
+        are assessed and evaluated by music critics, music journalists, and music scholars, as well as amateurs.
+        <br/><br/>
+        <center>
+            <div class="blog">
+                <button onclick="likeBlog('likeCount2')" class="like-button" style="height: 30px; width: 35px; background-color: red"><i class="far fa-thumbs-up">Like</i></button>
+                <div class="like-counter" style="background-color: white; margin-left:1%; width:80px">Likes: <span id="likeCount2">0</span></div>
+                
+                <p style="font-size:30px">Comments</p>
+                <form onsubmit="event.preventDefault();onFormSubmit();">
+                <textarea id="name" cols="20" rows="5" style=" background-color:rgb(217, 174, 228);color:rgb(11, 15, 19);" placeholder="Write the comment"></textarea>
+                <br />
+                <input type="button" value="Submit" onclick='MD()'>
+            </form>
+            <div id="msg"></div>
+            <table style="width: 70%;">
+                <tr>
+                    <td>Serial No:</td>
+                    <td>Comments</td>
+                    <td>Delete/Edit</td>
+                </tr>
+                <tbody id="root">
+                    <script>
+                        SD(); id = "hi";
+                        function SD() {
+                            arr = gcd();
+                            if (arr != null) {
+                                html = '';
+                                e = 1;
+                                for (let l in arr) {
+                                    html = html + `<tr><td>${e}</td>
+			<td>${arr[l]}</td><td><a href="javascript:void(0)" onclick="ED(${l})">Edit</a>
+			&nbsp;<a href="javascript:void(0)" onclick="DD(${l})">Delete</a></td></tr>`;
+                                    e = e + 1;
+                                }
+                                document.getElementById('root').innerHTML = html;
+
+                            }
+                        }
+                        function gcd() {
+                            arr = JSON.parse(localStorage.getItem('crud'));
+                            return arr;
+                        }
+                        function MD() {
+                            document.getElementById('msg').innerHTML = "";
+                            let name = document.getElementById('name').value;
+
+                            console.log(id);
+                            if (id != 'hi') {
+                                arr = gcd();
+                                arr[id] = name;
+                                scd(arr);
+                            } else {
+                                arr = gcd();
+                                if (arr == null) {
+                                    data = [name];
+                                    scd(data);
+                                } else {
+                                    arr.push(name);
+                                    scd(arr);
+                                }
+                            }
+                            document.getElementById('name').value = '';
+                            SD();
+
+                        }
+                        function scd(p) {
+                            localStorage.setItem('crud', JSON.stringify(p));
+                        }
+                        function DD(r) {
+                            arr = gcd();
+                            arr.splice(r, 1);
+                            scd(arr);
+                            SD();
+                        }
+                        function ED(r) {
+                            id = r;
+                            arr = gcd();
+                            document.getElementById('name').value = arr[r];
+                        }
+                    </script>
+            </table>
+            </div>
+        </center>
+    </body>
+</html>

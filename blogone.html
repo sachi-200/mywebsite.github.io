@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BLOGONE</title>
+    </head>
+    <body>
+        <script src="blogone.js"></script>
+        <center><h1>CHESS</h1></center>
+        <br/>
+        <h2>Chess, one of the oldest and most popular board games, played by two opponents on a checkered board 
+        with specially designed pieces of contrasting colours, commonly white and black.<br/> 
+        White moves first, after which the players alternate turns in accordance with fixed rules, each player 
+        attempting to force the opponent’s principal piece, the King, into checkmate—a position where it 
+        is unable to avoid capture.<br/>
+        Chess first appeared in India about the 6th century AD and by the 10th century had spread from Asia to 
+        the Middle East and Europe.<br/>
+        Since at least the 15th century, chess has been known as the “royal game” because of its popularity 
+        among the nobility.<br/>
+        Rules and set design slowly evolved until both reached today’s standard in the early 19th century. Once 
+        an intellectual diversion favoured by the upper classes, chess went through an explosive growth in 
+        interest during the 20th century as professional and state-sponsored players competed for an 
+        officially recognized world championship title and increasingly lucrative tournament prizes.<br/>
+        Organized chess tournaments, postal correspondence games, and Internet chess now attract men, women, 
+        and children around the world.
+        </h2>
+        <br/>
+        <center>
+        <div class="blog">
+            <button onclick="likeBlog('likeCount1')" class="like-button" style="height: 30px; width: 35px; background-color: red"><i class="far fa-thumbs-up">Like</i></button>
+            <div class="like-counter" style="background-color: white; margin-left:1%; width:80px">Likes: <span id="likeCount1">0</span></div>
+                
+            <p style="font-size:30px">Comments</p>
+            <form onsubmit="event.preventDefault();onFormSubmit();">
+                <textarea id="name" cols="20" rows="5" style=" background-color:rgb(217, 174, 228);color:rgb(11, 15, 19);" placeholder="Write the comment"></textarea>
+                <br />
+                <input type="button" value="Submit" onclick='MD()'>
+            </form>
+            <div id="msg"></div>
+            <table style="width: 70%;">
+                <tr>
+                    <td>Serial No:</td>
+                    <td>Comments</td>
+                    <td>Delete/Edit</td>
+                </tr>
+                <tbody id="root">
+                    <script>
+                        SD(); id = "hi";
+                        function SD() {
+                            arr = gcd();
+                            if (arr != null) {
+                                html = '';
+                                e = 1;
+                                for (let l in arr) {
+                                    html = html + `<tr><td>${e}</td>
+			<td>${arr[l]}</td><td><a href="javascript:void(0)" onclick="ED(${l})">Edit</a>
+			&nbsp;<a href="javascript:void(0)" onclick="DD(${l})">Delete</a></td></tr>`;
+                                    e = e + 1;
+                                }
+                                document.getElementById('root').innerHTML = html;
+
+                            }
+                        }
+                        function gcd() {
+                            arr = JSON.parse(localStorage.getItem('crud'));
+                            return arr;
+                        }
+                        function MD() {
+                            document.getElementById('msg').innerHTML = "";
+                            let name = document.getElementById('name').value;
+
+                            console.log(id);
+                            if (id != 'hi') {
+                                arr = gcd();
+                                arr[id] = name;
+                                scd(arr);
+                            } else {
+                                arr = gcd();
+                                if (arr == null) {
+                                    data = [name];
+                                    scd(data);
+                                } else {
+                                    arr.push(name);
+                                    scd(arr);
+                                }
+                            }
+                            document.getElementById('name').value = '';
+                            SD();
+
+                        }
+                        function scd(p) {
+                            localStorage.setItem('crud', JSON.stringify(p));
+                        }
+                        function DD(r) {
+                            arr = gcd();
+                            arr.splice(r, 1);
+                            scd(arr);
+                            SD();
+                        }
+                        function ED(r) {
+                            id = r;
+                            arr = gcd();
+                            document.getElementById('name').value = arr[r];
+                        }
+                    </script>
+            </table>
+        </div>
+    </body>
+</html>
